@@ -56,7 +56,6 @@ public class Inventory : MonoBehaviour
         {
             characterItems.Remove(itemToRemove);
             inventoryUI.RemoveItem(itemToRemove);
-            Debug.Log("Removed item:" + itemToRemove.name);
         }
     }
 }
