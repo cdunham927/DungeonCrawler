@@ -5,10 +5,11 @@ using UnityEngine;
 public abstract class EnemyController : MonoBehaviour
 {
     [Header("Main stats")]
-    [SerializeField] float hp;
-    [SerializeField] float atk;
-    [SerializeField] float def;
-    [SerializeField] float evade;
+    [SerializeField] protected float hp;
+    [SerializeField] protected float maxHP;
+    [SerializeField] protected float atk;
+    [SerializeField] protected float def;
+    [SerializeField] protected float evade; 
     [Space]
     [Header("Stats for spawn rate")]
     [SerializeField] float spawnRate;
@@ -16,4 +17,6 @@ public abstract class EnemyController : MonoBehaviour
 
     public virtual void MainAttack() { }
     public virtual void SecondaryAttack() { }
+    public virtual void TakeDamage(float dmg) { }
+    
 }

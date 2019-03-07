@@ -1,9 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] float hp;
+    [SerializeField] float maxHP;
+    [SerializeField] float atk;
+    [SerializeField] float def;
+    [SerializeField] float speed; //Player Speed Stat
+    public Image health_bar;
+    public Text health;
+
+    BattleController controller;
+
+    public void Attack() 
+    {
+        if (controller.player_turn == true)
+        {
+            controller.enemy.TakeDamage(atk);
+            controller.player_turn = false;
+        }
+    }  
+
     public float spd;
     public float jumpSpd;
     Rigidbody bod;
@@ -13,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         bod = GetComponent<Rigidbody>();
+        controller = GameObject.Find("BattleController").GetComponent<BattleController>();
     }
 
     private void Update()
@@ -25,32 +46,51 @@ public class PlayerController : MonoBehaviour
         translation *= Time.deltaTime;
         rotation *= Time.deltaTime;
 
-
-        transform.Rotate(0, rotation, 0);
+        if (controller.battle)
+        {
+            transform.Rotate(0, rotation, 0);
+        }
+        
 
         if (Cursor.lockState == CursorLockMode.None) Cursor.lockState = CursorLockMode.Confined;
+        
+        //Health
+        health_bar.fillAmount = hp / maxHP;
+        health.text = "Player HP: " + hp;
     }
 
     private void FixedUpdate()
     {
-        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        if (movement.x != 0)
+        if (controller.battle)
         {
-            //Check for enemy encounter chance
+            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            bod.AddForce(transform.right * spd * Time.fixedDeltaTime * movement.x);
-        }
-        if (movement.y != 0)
-        {
-            //Check for enemy encounter chance
+            if (movement.x != 0)
+            {
+                //Check for enemy encounter chance
 
-            bod.AddForce(transform.forward * spd * Time.fixedDeltaTime * movement.y);
-        }
+                bod.AddForce(transform.right * spd * Time.fixedDeltaTime * movement.x);
+            }
+            if (movement.y != 0)
+            {
+                //Check for enemy encounter chance
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            bod.AddForce(transform.up * jumpSpd);
+                bod.AddForce(transform.forward * spd * Time.fixedDeltaTime * movement.y);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                bod.AddForce(transform.up * jumpSpd);
+            }
         }
+        
+    }
+    public void TakeDamage(float dmg)
+    {
+        hp -= dmg;
+    }
+    public void GameOver()
+    {
+
     }
 }
