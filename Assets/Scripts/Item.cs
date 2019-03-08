@@ -10,6 +10,9 @@ public class Item
     public Sprite icon;
     public Dictionary<string, int> stats = new Dictionary<string, int>();
 
+    public enum Actions { attack, heal };
+    public Actions itemAction = Actions.attack;
+
     public Item(int id, string name, string description, Dictionary<string, int> stats)
     {
         this.id = id;
@@ -26,5 +29,28 @@ public class Item
         this.description = item.description;
         this.icon = Resources.Load<Sprite>("ItemSprites/" + item.name);
         this.stats = item.stats;
+    }
+
+    void Use()
+    {
+        switch(itemAction)
+        {
+            case Actions.attack:
+                AttackItem();
+                break;
+            case Actions.heal:
+                HealItem();
+                break;
+        }
+    }
+
+    void AttackItem()
+    {
+
+    }
+
+    void HealItem()
+    {
+
     }
 }
