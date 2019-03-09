@@ -1889,6 +1889,7 @@ MonoBehaviour:
   enemy: {fileID: 964893185}
   player: {fileID: 1262065631}
   player_turn: 1
+  BattleCanvas: {fileID: 1646051676}
 --- !u!4 &1642455444
 Transform:
   m_ObjectHideFlags: 0

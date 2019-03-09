@@ -32,16 +32,16 @@ public class GoblinController : EnemyController
 
     public void DeadEnemy()
     {
-        if (hp == 0)
-        {
-            Destroy (gameObject);
-        }
+        Destroy (gameObject);
     }
     private void Update()
     {
         //Health
         health_bar.fillAmount = hp / maxHP;
         health.text = "Goblin HP: " + hp;
-        DeadEnemy();
+        if (hp <= 0)
+        {
+            DeadEnemy();
+        }
     }
 }
