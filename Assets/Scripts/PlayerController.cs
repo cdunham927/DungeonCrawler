@@ -14,11 +14,28 @@ public class PlayerController : MonoBehaviour
     public Text health;
 
     BattleController controller;
-    UIItem slot1Item;
+    public UIInventory uiStuff;
+    public Item slot1Item;
+    public Item slot2Item;
 
-    public void UseCurrentItem()
+    public void UseCurrentItem1()
     {
-        slot1Item.GetComponent<Item>().Use();
+        //slot1Item.GetComponent<Item>().Use();
+    }
+
+    void GetCurrentItems()
+    {
+        slot1Item = uiStuff.GetSlotA();
+        slot2Item = uiStuff.GetSlotB();
+        if (slot1Item != null)
+        {
+            Debug.Log(slot1Item.name);
+        }
+
+        if (slot2Item != null)
+        {
+            Debug.Log(slot2Item.name);
+        }
     }
 
     public void Attack() 
@@ -44,6 +61,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        GetCurrentItems();
+
         float check = Input.GetAxis("Mouse X");
         //Debug.Log("Our x is " + check);
         float translation = Input.GetAxis("Mouse Y") * rotSpdY;

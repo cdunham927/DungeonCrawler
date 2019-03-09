@@ -21,6 +21,16 @@ public class UIInventory : MonoBehaviour
         }
     }
 
+    public Item GetSlotA()
+    {
+        return UIItems[0].item;
+    }
+
+    public Item GetSlotB()
+    {
+        return UIItems[1].item;
+    }
+
     public void UpdateSlot(int slot, Item item)
     {
         UIItems[slot].UpdateItem(item);

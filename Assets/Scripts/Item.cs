@@ -31,7 +31,7 @@ public class Item
         this.stats = item.stats;
     }
 
-    void Use()
+    public void Use()
     {
         switch(itemAction)
         {

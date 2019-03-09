@@ -686,7 +686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &639295705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425e1542b673d1d4986c2e7d4e036060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battle: 0
+  battle: 1
   enemy: {fileID: 1362682307}
   player: {fileID: 1262065631}
   player_turn: 1
@@ -1568,6 +1568,7 @@ MonoBehaviour:
   speed: 4
   health_bar: {fileID: 689285865}
   health: {fileID: 826358194}
+  uiStuff: {fileID: 950466455}
   spd: 1000
   jumpSpd: 300
   rotSpdX: 100
@@ -1859,7 +1860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1344513082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2024,10 +2025,10 @@ RectTransform:
   m_Father: {fileID: 1412809098}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -23}
-  m_SizeDelta: {x: 170, y: 16}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1377479248
 MonoBehaviour:
@@ -2111,7 +2112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 143, y: 2}
-  m_SizeDelta: {x: 200, y: 46}
+  m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1412809099
 MonoBehaviour:

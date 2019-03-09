@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/ColeScene.unity
-=======
-- path: Assets/Scenes/Corey BillBoards.unity
->>>>>>> a79b763a589b6bfbf134e336956ed87f6b9aba5f
   isLoaded: 1
   isActive: 1
