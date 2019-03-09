@@ -14,6 +14,12 @@ public class PlayerController : MonoBehaviour
     public Text health;
 
     BattleController controller;
+    UIItem slot1Item;
+
+    public void UseCurrentItem()
+    {
+        slot1Item.GetComponent<Item>().Use();
+    }
 
     public void Attack() 
     {
