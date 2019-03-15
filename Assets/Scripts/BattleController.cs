@@ -16,15 +16,17 @@ public class BattleController : MonoBehaviour
         battle = true;
         BattleCanvas.enabled = false;
     }
+
     private void Update ()
     {   
         if (battle == false && enemy == null)
         {
             Invoke("BattleOver", 1f);
         }
+
         if (player_turn == false)
         {
-            enemy.MainAttack();
+            enemy.ChooseAttack();
             player_turn = true;
         }
     }

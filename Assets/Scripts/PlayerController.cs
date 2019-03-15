@@ -25,16 +25,19 @@ public class PlayerController : MonoBehaviour
 
     void GetCurrentItems()
     {
-        slot1Item = uiStuff.GetSlotA();
-        slot2Item = uiStuff.GetSlotB();
-        if (slot1Item != null)
+        if (uiStuff.gameObject.activeInHierarchy)
         {
-            Debug.Log(slot1Item.name);
-        }
+            slot1Item = uiStuff.GetSlotA();
+            slot2Item = uiStuff.GetSlotB();
+            if (slot1Item != null)
+            {
+                Debug.Log(slot1Item.name);
+            }
 
-        if (slot2Item != null)
-        {
-            Debug.Log(slot2Item.name);
+            if (slot2Item != null)
+            {
+                Debug.Log(slot2Item.name);
+            }
         }
     }
 

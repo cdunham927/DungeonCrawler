@@ -20,10 +20,10 @@ public class GoblinController : EnemyController
     }
     
 
-    //public override void SecondaryAttack()
-    //{
-
-    //}
+    public override void SpecialAttack()
+    {
+        Debug.Log("Special Attack");
+    }
 
     public override void TakeDamage(float dmg)
     {
@@ -34,6 +34,7 @@ public class GoblinController : EnemyController
     {
         Destroy (gameObject);
     }
+
     private void Update()
     {
         //Health

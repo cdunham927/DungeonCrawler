@@ -14,9 +14,25 @@ public abstract class EnemyController : MonoBehaviour
     [Header("Stats for spawn rate")]
     [SerializeField] float spawnRate;
     [SerializeField] float buddySpawnRate;
+    [Space]
+    [Header("For attacking")]
+    [Tooltip("Number from 0-1 that determines how often the enemy uses a special attack")]
+    public float specialAttackChance;
+    [SerializeField] protected bool canSpecialAttack = true;
 
     public virtual void MainAttack() { }
-    public virtual void SecondaryAttack() { }
+    public virtual void SpecialAttack() { }
     public virtual void TakeDamage(float dmg) { }
-    
+
+    public void ChooseAttack()
+    {
+        if (Random.value < specialAttackChance && canSpecialAttack)
+        {
+            SpecialAttack();
+        }
+        else
+        {
+            MainAttack();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIInventory : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class UIInventory : MonoBehaviour
             GameObject obj = Instantiate(slotPrefab);
             obj.transform.parent = slotPanel;
             UIItems.Add(obj.GetComponentInChildren<UIItem>());
+            if (i < 2)
+            {
+                obj.GetComponent<Image>().color = Color.blue;
+            }
         }
     }
 
