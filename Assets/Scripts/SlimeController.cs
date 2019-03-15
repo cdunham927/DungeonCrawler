@@ -22,7 +22,29 @@ public class SlimeController : EnemyController
 
     public override void SpecialAttack()
     {
-        Debug.Log("Special Attack");
+        //The slimes special attack splits it into 3 slimes, 
+        //dividing its health among them
+        if (hp >= 3)
+        {
+            float splitHp = Mathf.RoundToInt(hp / 3);
+            hp = splitHp;
+            EnemyController oSlime = Instantiate(gameObject).GetComponent<EnemyController>();
+            oSlime.hp = splitHp;
+            oSlime.canSpecialAttack = false;
+            EnemyController oSlime2 = Instantiate(gameObject).GetComponent<EnemyController>();
+            oSlime2.hp = splitHp;
+            oSlime2.canSpecialAttack = false;
+        }
+        else if (hp >= 2)
+        {
+            float splitHp = Mathf.RoundToInt(hp / 2);
+            EnemyController oSlime = Instantiate(gameObject).GetComponent<EnemyController>();
+            oSlime.hp = splitHp;
+            oSlime.canSpecialAttack = false;
+        }
+        else {
+            //Slime doesn't have enough health to split
+        }
         canSpecialAttack = false;
     }
 
