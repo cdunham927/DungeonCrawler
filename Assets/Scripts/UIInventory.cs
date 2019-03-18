@@ -17,12 +17,12 @@ public class UIInventory : MonoBehaviour
         for (int i = 0; i < inventorySlots; i++)
         {
             GameObject obj = Instantiate(slotPrefab);
-            obj.transform.parent = slotPanel;
+            obj.transform.SetParent(slotPanel);
             UIItems.Add(obj.GetComponentInChildren<UIItem>());
-            if (i < 2)
-            {
-                obj.GetComponent<Image>().color = Color.blue;
-            }
+            //if (i < 2)
+            //{
+                //obj.GetComponent<Image>().color = Color.blue;
+            //}
         }
     }
 

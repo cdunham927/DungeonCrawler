@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\BattleScript.cs" />
     <Compile Include="Assets\Scripts\Billboard Scene Scripts\camera_mover.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\EnemyInventory.cs" />
     <Compile Include="Assets\Scripts\FollowMouse.cs" />
     <Compile Include="Assets\Scripts\GoblinController.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />

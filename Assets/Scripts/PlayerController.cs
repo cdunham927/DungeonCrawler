@@ -18,6 +18,13 @@ public class PlayerController : MonoBehaviour
     public Item slot1Item;
     public Item slot2Item;
 
+    void Awake()
+    {
+        bod = GetComponent<Rigidbody>();
+        controller = GameObject.Find("BattleController").GetComponent<BattleController>();
+        uiStuff = FindObjectOfType<UIInventory>();
+    }
+
     public void UseCurrentItem1()
     {
         //slot1Item.GetComponent<Item>().Use();
@@ -25,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     void GetCurrentItems()
     {
-        if (uiStuff.gameObject.activeInHierarchy)
+        if (uiStuff != null && uiStuff.gameObject.activeInHierarchy)
         {
             slot1Item = uiStuff.GetSlotA();
             slot2Item = uiStuff.GetSlotB();
@@ -55,12 +62,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody bod;
     public float rotSpdX;
     public float rotSpdY;
-
-    private void Awake()
-    {
-        bod = GetComponent<Rigidbody>();
-        controller = GameObject.Find("BattleController").GetComponent<BattleController>();
-    }
 
     private void Update()
     {
