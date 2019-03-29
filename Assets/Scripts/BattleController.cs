@@ -10,6 +10,7 @@ public class BattleController : MonoBehaviour
     public PlayerController player;
     public bool player_turn = true;
     public Canvas BattleCanvas;
+    public List<EnemyController> enemies = new List<EnemyController>();
 
     public void BattleOver()
     {
