@@ -20,6 +20,18 @@ public abstract class EnemyController : MonoBehaviour
     public float specialAttackChance;
     [SerializeField] public bool canSpecialAttack = true;
 
+    //For Enemy inventory
+    GameObject enemyCanvas;
+    EnemyInventory enemyInventory;
+
+    private void Awake()
+    {
+        enemyCanvas = GameObject.Find("EnemyCanvas");
+        enemyInventory = GetComponent<EnemyInventory>();
+
+        enemyInventory.GiveItem(0);
+    }
+
     public virtual void MainAttack() { }
     public virtual void SpecialAttack() { }
     public virtual void TakeDamage(float dmg) { }

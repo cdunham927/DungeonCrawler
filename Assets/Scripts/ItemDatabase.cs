@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class ItemDatabase : MonoBehaviour
 {
+    public static ItemDatabase database;
     public List<Item> items = new List<Item>();
 
     private void Awake()
     {
+        if (database == null)
+        {
+            database = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
+
         BuildDatabase();
     }
 
@@ -40,7 +48,7 @@ public class ItemDatabase : MonoBehaviour
             {
                 { "Def", 2 },
                 { "Stam", 1 },
-                { "Rare", 1 },
+                { "Rare", 2 },
                 { "Cost", 8 }
             }),
             
@@ -48,6 +56,15 @@ public class ItemDatabase : MonoBehaviour
             new Dictionary<string, int>
             {
                 { "Healing", 5 },
+                { "Rare", 1 },
+                { "Cost", 5 }
+            }),
+
+            new Item(3, "Buckler", "Weaker shield.",
+            new Dictionary<string, int>
+            {
+                { "Def", 1 },
+                { "Stam", 1 },
                 { "Rare", 1 },
                 { "Cost", 5 }
             })
