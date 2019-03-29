@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class GolemController : EnemyController
 {
     BattleController controller;
-    public Image health_bar;
-    public Text health;
     
     void Awake() 
     {
@@ -37,9 +35,6 @@ public class GolemController : EnemyController
 
     private void Update()
     {
-        //Health
-        health_bar.fillAmount = hp / maxHP;
-        health.text = "Golem HP: " + hp;
         if (hp <= 0)
         {
             DeadEnemy();

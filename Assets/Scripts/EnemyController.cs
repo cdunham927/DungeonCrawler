@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class EnemyController : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public abstract class EnemyController : MonoBehaviour
     [SerializeField] protected float evade; 
     [Space]
     [Header("Stats for spawn rate")]
-    [SerializeField] float spawnRate;
-    [SerializeField] float buddySpawnRate;
+    public float spawnRate;
+    public float buddySpawnRate;
     [Space]
     [Header("For attacking")]
     [Tooltip("Number from 0-1 that determines how often the enemy uses a special attack")]
@@ -24,8 +25,18 @@ public abstract class EnemyController : MonoBehaviour
     GameObject enemyCanvas;
     EnemyInventory enemyInventory;
 
+    //For enemy UI
+    public Image health_bar;
+    public Text health;
+
+    //Controllers for taking damage
+    BattleController bCon;
+    PlayerController pCon;
+
     private void Awake()
     {
+        bCon = FindObjectOfType<BattleController>();
+        pCon = FindObjectOfType<PlayerController>();
         enemyCanvas = GameObject.Find("EnemyCanvas");
         enemyInventory = GetComponent<EnemyInventory>();
 
@@ -45,6 +56,18 @@ public abstract class EnemyController : MonoBehaviour
         else
         {
             MainAttack();
+        }
+    }
+
+    void OnMouseDown()
+    {
+        if (bCon == null) bCon = FindObjectOfType<BattleController>();
+        if (pCon == null) pCon = FindObjectOfType<PlayerController>();
+        if (bCon.canAttack)
+        {
+            TakeDamage(pCon.totalAttack);
+            bCon.canAttack = false;
+            bCon.player_turn = !bCon.player_turn;
         }
     }
 }

@@ -12654,7 +12654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &639295705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20219,10 +20219,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battle: 1
-  enemy: {fileID: 1635458878}
   player: {fileID: 1262065631}
   player_turn: 1
   BattleCanvas: {fileID: 0}
+  enemies: []
+  canAttack: 0
 --- !u!4 &1036887118
 Transform:
   m_ObjectHideFlags: 0
@@ -24677,6 +24678,7 @@ GameObject:
   - component: {fileID: 1262065630}
   - component: {fileID: 1262065636}
   - component: {fileID: 1262065632}
+  - component: {fileID: 1262065637}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -24719,7 +24721,9 @@ MonoBehaviour:
   speed: 4
   health_bar: {fileID: 689285865}
   health: {fileID: 826358194}
+  totalAttack: 0
   uiStuff: {fileID: 0}
+  walking: 0
   spd: 1000
   jumpSpd: 300
   rotSpdX: 100
@@ -24813,6 +24817,26 @@ MonoBehaviour:
     type: 3}
   inventoryUI: {fileID: 0}
   spawnPos: {fileID: 263507495}
+--- !u!114 &1262065637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262065629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a89debf427f9f4697b901050af1af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyEncounterNumber: 0
+  maxNumber: 50
+  enemies:
+  - {fileID: 8766805316929287968, guid: 7465eeebde5330f40806b7ed77758c1a, type: 3}
+  - {fileID: 6815384017647201662, guid: 367c569316cf438408aa8ec6d85ca1a3, type: 3}
+  timeBetweenRandomNumberCalls: 2
+  healthBar: {fileID: 927913052}
+  healthText: {fileID: 612091338}
 --- !u!1001 &1262420274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27385,60 +27409,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1359399005}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1362682306
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1362682308}
-  - component: {fileID: 1362682307}
-  m_Layer: 0
-  m_Name: Goblin
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1362682307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362682306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd0acc4d02dbb334b98f7282dbd94bf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  maxHP: 100
-  atk: 3
-  def: 3
-  evade: 3
-  spawnRate: 0
-  buddySpawnRate: 0
-  specialAttackChance: 1
-  canSpecialAttack: 1
-  health_bar: {fileID: 927913052}
-  health: {fileID: 612091338}
---- !u!4 &1362682308
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362682306}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1364272339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28341,7 +28311,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1403875100
 PrefabInstance:
@@ -32866,7 +32836,7 @@ Transform:
   - {fileID: 255025297}
   - {fileID: 1013375522}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1622822227
 PrefabInstance:
@@ -33468,77 +33438,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1631520613}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1635458877
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1635458879}
-  - component: {fileID: 1635458878}
-  - component: {fileID: 1635458881}
-  m_Layer: 0
-  m_Name: Slime
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1635458878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635458877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ded71004227c8a49886cf7fc47d1bcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  maxHP: 100
-  atk: 3
-  def: 3
-  evade: 3
-  spawnRate: 0
-  buddySpawnRate: 0
-  specialAttackChance: 0.375
-  canSpecialAttack: 1
-  health_bar: {fileID: 927913052}
-  health: {fileID: 612091338}
---- !u!4 &1635458879
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635458877}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1635458881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635458877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29e15bcceddf3c24aae508eed6819e0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiInventoryPrefab: {fileID: 5358783583414943701, guid: ee98c9d3e9b9f704094f5d1a42151c08,
-    type: 3}
-  inventoryUI: {fileID: 0}
-  spawnPos: {fileID: 634629345}
 --- !u!1001 &1636857687
 PrefabInstance:
   m_ObjectHideFlags: 0

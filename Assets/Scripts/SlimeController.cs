@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class SlimeController : EnemyController
 {
     BattleController controller;
-    public Image health_bar;
-    public Text health;
 
     void Awake()
     {
@@ -18,7 +16,6 @@ public class SlimeController : EnemyController
     {
         controller.player.TakeDamage(atk);
     }
-
 
     public override void SpecialAttack()
     {
@@ -55,6 +52,7 @@ public class SlimeController : EnemyController
 
     public void DeadEnemy()
     {
+        controller.RemoveEnemy(this);
         Destroy(gameObject);
     }
 

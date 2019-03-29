@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class GoblinController : EnemyController
 {   
     BattleController controller;
-    public Image health_bar;
-    public Text health;
     
     void Awake() 
     {

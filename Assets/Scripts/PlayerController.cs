@@ -13,16 +13,23 @@ public class PlayerController : MonoBehaviour
     public Image health_bar;
     public Text health;
 
+    //Player total attack
+    public float totalAttack;
+
     BattleController controller;
     public UIInventory uiStuff;
     public Item slot1Item;
     public Item slot2Item;
+
+    public bool walking = false;
 
     void Awake()
     {
         bod = GetComponent<Rigidbody>();
         controller = GameObject.Find("BattleController").GetComponent<BattleController>();
         uiStuff = FindObjectOfType<UIInventory>();
+
+        totalAttack = atk;
     }
 
     public void UseCurrentItem1()
@@ -30,7 +37,7 @@ public class PlayerController : MonoBehaviour
         //slot1Item.GetComponent<Item>().Use();
     }
 
-    void GetCurrentItems()
+    public void GetCurrentItems()
     {
         if (uiStuff != null && uiStuff.gameObject.activeInHierarchy)
         {
@@ -52,8 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         if (controller.player_turn == true)
         {
-            controller.enemy.TakeDamage(atk);
-            controller.player_turn = false;
+            controller.canAttack = true;
         }
     }  
 
@@ -97,15 +103,17 @@ public class PlayerController : MonoBehaviour
             if (movement.x != 0)
             {
                 //Check for enemy encounter chance
-
+                walking = true;
                 bod.AddForce(transform.right * spd * Time.fixedDeltaTime * movement.x);
             }
             if (movement.y != 0)
             {
                 //Check for enemy encounter chance
-
+                walking = true;
                 bod.AddForce(transform.forward * spd * Time.fixedDeltaTime * movement.y);
             }
+
+            if (movement.x == 0 && movement.y == 0) walking = false;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {

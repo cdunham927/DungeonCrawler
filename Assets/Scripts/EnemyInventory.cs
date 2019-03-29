@@ -17,7 +17,7 @@ public class EnemyInventory : MonoBehaviour
         inventoryUI = obj.GetComponent<UIInventory>();
         inventoryUI.transform.SetParent(inventoryCanvas.transform);
 
-        GiveItem(0);
+        //GiveItem(0);
     }
 
     public void GiveItem(int id)
