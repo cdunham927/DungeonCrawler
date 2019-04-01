@@ -106,6 +106,9 @@ public class PlayerController : MonoBehaviour
                 walking = true;
                 bod.AddForce(transform.right * spd * Time.fixedDeltaTime * movement.x);
             }
+
+
+            //Only jump when you're on the ground
             if (movement.y != 0)
             {
                 //Check for enemy encounter chance

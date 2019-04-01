@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ColeScene.unity
+- path: C:/Users/Owner/Documents/SlimeRPG/Assets/Scenes/SampleScene.unity
   isLoaded: 1
   isActive: 1
