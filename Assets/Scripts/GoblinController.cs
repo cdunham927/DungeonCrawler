@@ -10,6 +10,9 @@ public class GoblinController : EnemyController
     void Awake() 
     {
         controller = GameObject.Find("BattleController").GetComponent<BattleController>();
+        
+        health_bar = GetComponentInChildren<Image>();
+        health = health_bar.GetComponentInChildren<Text>();
     }
 
     public override void MainAttack()

@@ -21,6 +21,8 @@ public class Inventory : MonoBehaviour
         GiveItem("Shield");
 
         //RemoveItem(1);
+
+        obj.SetActive(false);
     }
 
     private void Update()

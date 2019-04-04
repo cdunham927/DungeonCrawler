@@ -18,6 +18,7 @@ public class EnemyEncounter : MonoBehaviour
     //For ui
     public Image healthBar;
     public Text healthText;
+    public GameObject battleCanvas;
 
     void Start()
     {
@@ -48,11 +49,29 @@ public class EnemyEncounter : MonoBehaviour
                     //Add enemy to battle controller and start battle here
                     battle.battle = false;
                     pCont.walking = false;
-                    EnemyController enem = Instantiate(enemy).GetComponent<EnemyController>();
-                    battle.enemies.Add(enem);
-                    enemy.health_bar = healthBar;
-                    enemy.health = healthText;
-                    break;
+                    //Determine if more than one enemy spawns
+                    if (Random.value <= enemy.buddySpawnRate)
+                    {
+                        for (int i = 0; i < enemy.buddySpawnNumber; i++)
+                        {
+                            EnemyController enem = Instantiate(enemy, pCont.enemySpawnPoints[i].transform).GetComponent<EnemyController>();
+                            battle.enemies.Add(enem);
+                            enemy.health_bar = healthBar;
+                            enemy.health = healthText;
+                        }
+                        battleCanvas.SetActive(true);
+                        break;
+                    }
+                    //Only one enemy spawns
+                    else
+                    {
+                        EnemyController enem = Instantiate(enemy, pCont.enemySpawnPoints[0].transform).GetComponent<EnemyController>();
+                        battle.enemies.Add(enem);
+                        enemy.health_bar = healthBar;
+                        enemy.health = healthText;
+                        battleCanvas.SetActive(true);
+                        break;
+                    }
                 }
             }
 

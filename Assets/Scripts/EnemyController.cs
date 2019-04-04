@@ -14,7 +14,10 @@ public abstract class EnemyController : MonoBehaviour
     [Space]
     [Header("Stats for spawn rate")]
     public float spawnRate;
+    [Range(0, 1)]
     public float buddySpawnRate;
+    [Range(2, 3)]
+    public int buddySpawnNumber;
     [Space]
     [Header("For attacking")]
     [Tooltip("Number from 0-1 that determines how often the enemy uses a special attack")]
@@ -41,6 +44,9 @@ public abstract class EnemyController : MonoBehaviour
         enemyInventory = GetComponent<EnemyInventory>();
 
         enemyInventory.GiveItem(0);
+
+        health_bar = GetComponentInChildren<Image>();
+        health = health_bar.GetComponentInChildren<Text>();
     }
 
     public virtual void MainAttack() { }

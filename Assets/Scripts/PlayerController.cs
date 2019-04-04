@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
     public Item slot1Item;
     public Item slot2Item;
 
+    //Spots to spawn the enemy(in front of the player)
+    public GameObject[] enemySpawnPoints;
+
+    //Keep track of the player moving
     public bool walking = false;
 
     void Awake()

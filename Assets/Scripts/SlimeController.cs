@@ -6,10 +6,15 @@ using UnityEngine.UI;
 public class SlimeController : EnemyController
 {
     BattleController controller;
+    PlayerController pCon;
 
     void Awake()
     {
         controller = GameObject.Find("BattleController").GetComponent<BattleController>();
+        pCon = FindObjectOfType<PlayerController>();
+
+        health_bar = GetComponentInChildren<Image>();
+        health = health_bar.GetComponentInChildren<Text>();
     }
 
     public override void MainAttack()
@@ -21,21 +26,21 @@ public class SlimeController : EnemyController
     {
         //The slimes special attack splits it into 3 slimes, 
         //dividing its health among them
-        if (hp >= 3)
+        if (hp >= 3 && controller.enemies.Count < 3)
         {
             float splitHp = Mathf.RoundToInt(hp / 3);
             hp = splitHp;
-            EnemyController oSlime = Instantiate(gameObject).GetComponent<EnemyController>();
+            EnemyController oSlime = Instantiate(gameObject, pCon.enemySpawnPoints[1].transform).GetComponent<EnemyController>();
             oSlime.hp = splitHp;
             oSlime.canSpecialAttack = false;
-            EnemyController oSlime2 = Instantiate(gameObject).GetComponent<EnemyController>();
+            EnemyController oSlime2 = Instantiate(gameObject, pCon.enemySpawnPoints[2].transform).GetComponent<EnemyController>();
             oSlime2.hp = splitHp;
             oSlime2.canSpecialAttack = false;
         }
-        else if (hp >= 2)
+        else if (hp >= 2 && controller.enemies.Count < 2)
         {
             float splitHp = Mathf.RoundToInt(hp / 2);
-            EnemyController oSlime = Instantiate(gameObject).GetComponent<EnemyController>();
+            EnemyController oSlime = Instantiate(gameObject, pCon.enemySpawnPoints[1].transform).GetComponent<EnemyController>();
             oSlime.hp = splitHp;
             oSlime.canSpecialAttack = false;
         }
