@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class GoblinController : EnemyController
 {   
     BattleController controller;
-    
+    PlayerController pCon;
+
     void Awake() 
     {
         controller = GameObject.Find("BattleController").GetComponent<BattleController>();
+        pCon = FindObjectOfType<PlayerController>();
         
         health_bar = GetComponentInChildren<Image>();
         health = health_bar.GetComponentInChildren<Text>();
@@ -33,6 +35,7 @@ public class GoblinController : EnemyController
 
     public void DeadEnemy()
     {
+        controller.RemoveEnemy(this);
         Destroy (gameObject);
     }
 
@@ -44,6 +47,7 @@ public class GoblinController : EnemyController
         if (hp <= 0)
         {
             DeadEnemy();
+            pCon.xp += xp;
         }
     }
 }

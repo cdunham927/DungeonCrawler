@@ -69,6 +69,7 @@ public class SlimeController : EnemyController
         if (hp <= 0)
         {
             DeadEnemy();
+            pCon.xp += xp;
         }
     }
 }
