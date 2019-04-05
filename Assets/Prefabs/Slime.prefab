@@ -307,6 +307,7 @@ MonoBehaviour:
   atk: 3
   def: 3
   evade: 3
+  xp: 6
   spawnRate: 17
   buddySpawnRate: 0.25
   buddySpawnNumber: 3

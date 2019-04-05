@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float atk;
     [SerializeField] float def;
     [SerializeField] float speed; //Player Speed Stat
+    public float xp;
     public Image health_bar;
     public Text health;
 
@@ -96,6 +98,8 @@ public class PlayerController : MonoBehaviour
         //Health
         health_bar.fillAmount = hp / maxHP;
         health.text = "Player HP: " + hp;
+
+        if (hp <= 0) GameOver();
     }
 
     private void FixedUpdate()
@@ -135,6 +139,6 @@ public class PlayerController : MonoBehaviour
     }
     public void GameOver()
     {
-
+        SceneManager.LoadScene("JesseScene");
     }
 }

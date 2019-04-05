@@ -11,6 +11,7 @@ public abstract class EnemyController : MonoBehaviour
     [SerializeField] protected float atk;
     [SerializeField] protected float def;
     [SerializeField] protected float evade; 
+    [SerializeField] protected float xp;
     [Space]
     [Header("Stats for spawn rate")]
     public float spawnRate;
