@@ -36,7 +36,7 @@ public class GoblinController : EnemyController
     public void DeadEnemy()
     {
         controller.RemoveEnemy(this);
-        Destroy (gameObject);
+        gameObject.SetActive(false);
     }
 
     private void Update()

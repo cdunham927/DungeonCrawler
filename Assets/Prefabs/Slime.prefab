@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 6815384017647201662}
   - component: {fileID: 6815384017647201537}
   - component: {fileID: 328296590923607781}
-  - component: {fileID: 4363185741411449016}
+  - component: {fileID: 430244853785823597}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -379,7 +379,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4363185741411449016
+--- !u!61 &430244853785823597
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

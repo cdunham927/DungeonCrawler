@@ -8,12 +8,14 @@ public class UIInventory : MonoBehaviour
     public List<UIItem> UIItems = new List<UIItem>();
     public GameObject slotPrefab;
     public Transform slotPanel;
+    //PlayerController pcon;
 
     [Range(1, 16)]
     public int inventorySlots = 16;
 
     private void Awake()
     {
+        //pcon = FindObjectOfType<PlayerController>();
         for (int i = 0; i < inventorySlots; i++)
         {
             GameObject obj = Instantiate(slotPrefab);

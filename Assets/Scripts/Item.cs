@@ -8,12 +8,12 @@ public class Item
     public string name;
     public string description;
     public Sprite icon;
-    public Dictionary<string, int> stats = new Dictionary<string, int>();
+    public Dictionary<string, float> stats = new Dictionary<string, float>();
 
     public enum Actions { attack, heal };
     public Actions itemAction = Actions.attack;
 
-    public Item(int id, string name, string description, Dictionary<string, int> stats)
+    public Item(int id, string name, string description, Dictionary<string, float> stats)
     {
         this.id = id;
         this.name = name;

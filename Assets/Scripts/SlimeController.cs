@@ -36,6 +36,8 @@ public class SlimeController : EnemyController
             EnemyController oSlime2 = Instantiate(gameObject, pCon.enemySpawnPoints[2].transform).GetComponent<EnemyController>();
             oSlime2.hp = splitHp;
             oSlime2.canSpecialAttack = false;
+            controller.enemies.Add(oSlime);
+            controller.enemies.Add(oSlime2);
         }
         else if (hp >= 2 && controller.enemies.Count < 2)
         {
@@ -43,6 +45,7 @@ public class SlimeController : EnemyController
             EnemyController oSlime = Instantiate(gameObject, pCon.enemySpawnPoints[1].transform).GetComponent<EnemyController>();
             oSlime.hp = splitHp;
             oSlime.canSpecialAttack = false;
+            controller.enemies.Add(oSlime);
         }
         else {
             //Slime doesn't have enough health to split
@@ -58,7 +61,7 @@ public class SlimeController : EnemyController
     public void DeadEnemy()
     {
         controller.RemoveEnemy(this);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void Update()

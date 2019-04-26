@@ -10,9 +10,11 @@ public class UIItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, 
     Image spriteImage;
     GameObject inventoryCanvas;
     private UIItem selectedItem;
+    PlayerController pcon;
 
     private void Awake()
     {
+        pcon = FindObjectOfType<PlayerController>();
         inventoryCanvas = GameObject.Find("InventoryCanvas");
         selectedItem = GameObject.Find("SelectedItem").GetComponent<UIItem>();
         spriteImage = GetComponent<Image>();
@@ -43,17 +45,20 @@ public class UIItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, 
                 selectedItem.transform.position = new Vector3(transform.position.x, transform.position.y, 5);
                 selectedItem.UpdateItem(this.item);
                 UpdateItem(clone);
+                pcon.GetCurrentItems();
             }
             else
             {
                 selectedItem.UpdateItem(this.item);
                 UpdateItem(null);
+                pcon.GetCurrentItems();
             }
         }
         else if (selectedItem.item != null)
         {
             UpdateItem(selectedItem.item);
             selectedItem.UpdateItem(null);
+            pcon.GetCurrentItems();
         }
         {
             

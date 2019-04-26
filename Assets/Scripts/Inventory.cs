@@ -9,12 +9,16 @@ public class Inventory : MonoBehaviour
     public GameObject uiInventoryPrefab;
     public UIInventory inventoryUI;
     [SerializeField] Transform spawnPos;
+    PlayerController pcon;
 
     private void Awake()
     {
+        pcon = FindObjectOfType<PlayerController>();
+
         inventoryCanvas = GameObject.Find("InventoryCanvas");
         GameObject obj = Instantiate(uiInventoryPrefab, spawnPos);
         inventoryUI = obj.GetComponent<UIInventory>();
+        pcon.uiStuff = inventoryUI;
         inventoryUI.transform.SetParent(inventoryCanvas.transform);
 
         GiveItem(0);

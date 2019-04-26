@@ -29,35 +29,23 @@ public class PlayerController : MonoBehaviour
     //Keep track of the player moving
     public bool walking = false;
 
+    public LayerMask groundMask;
+
     void Awake()
     {
         bod = GetComponent<Rigidbody>();
         controller = GameObject.Find("BattleController").GetComponent<BattleController>();
-        uiStuff = FindObjectOfType<UIInventory>();
 
+        GetCurrentItems();
         totalAttack = atk;
-    }
-
-    public void UseCurrentItem1()
-    {
-        //slot1Item.GetComponent<Item>().Use();
     }
 
     public void GetCurrentItems()
     {
-        if (uiStuff != null && uiStuff.gameObject.activeInHierarchy)
+        if (uiStuff != null)
         {
             slot1Item = uiStuff.GetSlotA();
-            slot2Item = uiStuff.GetSlotB();
-            if (slot1Item != null)
-            {
-                Debug.Log(slot1Item.name);
-            }
-
-            if (slot2Item != null)
-            {
-                Debug.Log(slot2Item.name);
-            }
+            slot2Item = uiStuff.UIItems[1].item;
         }
     }
 
@@ -67,7 +55,22 @@ public class PlayerController : MonoBehaviour
         {
             controller.canAttack = true;
         }
+        
+        if (slot1Item == null)
+        {
+            GetCurrentItems();
+        }
+        float mod = GetItemStats();
+
+        totalAttack = atk + mod;
     }  
+
+    float GetItemStats()
+    {
+        float mod = 0;
+        slot1Item.stats.TryGetValue("Atk", out mod);
+        return mod;
+    }
 
     public float spd;
     public float jumpSpd;
@@ -77,18 +80,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        GetCurrentItems();
-
-        float check = Input.GetAxis("Mouse X");
-        //Debug.Log("Our x is " + check);
-        float translation = Input.GetAxis("Mouse Y") * rotSpdY;
-        float rotation = Input.GetAxis("Mouse X") * rotSpdX;
-
-        translation *= Time.deltaTime;
-        rotation *= Time.deltaTime;
+        if (uiStuff == null)
+            uiStuff = FindObjectOfType<UIInventory>();
 
         if (controller.battle)
         {
+            float check = Input.GetAxis("Mouse X");
+            //Debug.Log("Our x is " + check);
+            float translation = Input.GetAxis("Mouse Y") * rotSpdY;
+            float rotation = Input.GetAxis("Mouse X") * rotSpdX;
+
+            translation *= Time.deltaTime;
+            rotation *= Time.deltaTime;
+
             transform.Rotate(0, rotation, 0);
         }
         
@@ -100,6 +104,16 @@ public class PlayerController : MonoBehaviour
         health.text = "Player HP: " + hp;
 
         if (hp <= 0) GameOver();
+
+        //Dev cheats
+        if (Application.isEditor)
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                hp = maxHP;
+                atk = 25;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -117,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
 
             //Only jump when you're on the ground
-            if (movement.y != 0)
+            if (Physics.Raycast(transform.position, Vector3.down, groundMask) && movement.y != 0)
             {
                 //Check for enemy encounter chance
                 walking = true;
@@ -139,6 +153,31 @@ public class PlayerController : MonoBehaviour
     }
     public void GameOver()
     {
-        SceneManager.LoadScene("JesseScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+
+    public void axe_hit(float multi)
+    {
+        if (controller.player_turn == true)
+        {
+            controller.canAttack = true;
+        }
+        totalAttack = atk * multi;
+    }
+
+    public void spear_attack()
+    {
+
+        int counter = 0;
+
+
+        int attack_amount = Random.Range(1, 10);
+        while (attack_amount >= counter)
+        {
+            Attack();
+            counter++;
+        }
+        counter = 0;
     }
 }

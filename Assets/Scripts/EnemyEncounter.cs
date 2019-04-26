@@ -16,8 +16,6 @@ public class EnemyEncounter : MonoBehaviour
     BattleController battle;
 
     //For ui
-    public Image healthBar;
-    public Text healthText;
     public GameObject battleCanvas;
 
     void Start()
@@ -56,8 +54,7 @@ public class EnemyEncounter : MonoBehaviour
                         {
                             EnemyController enem = Instantiate(enemy, pCont.enemySpawnPoints[i].transform).GetComponent<EnemyController>();
                             battle.enemies.Add(enem);
-                            enemy.health_bar = healthBar;
-                            enemy.health = healthText;
+                            //enem.transform.SetParent(null);
                         }
                         battleCanvas.SetActive(true);
                         break;
@@ -67,14 +64,13 @@ public class EnemyEncounter : MonoBehaviour
                     {
                         EnemyController enem = Instantiate(enemy, pCont.enemySpawnPoints[0].transform).GetComponent<EnemyController>();
                         battle.enemies.Add(enem);
-                        enemy.health_bar = healthBar;
-                        enemy.health = healthText;
+                        //enem.transform.SetParent(null);
                         battleCanvas.SetActive(true);
                         break;
                     }
                 }
             }
-
+            enemyEncounterNumber = 10000;
             timeholder = Time.time + timeBetweenRandomNumberCalls;
         }
     }

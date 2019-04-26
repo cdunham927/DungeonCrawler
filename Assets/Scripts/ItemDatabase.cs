@@ -34,7 +34,7 @@ public class ItemDatabase : MonoBehaviour
         items = new List<Item>()
         {
             new Item(0, "Sword", "Stab things. Handle with care.",
-            new Dictionary<string, int>
+            new Dictionary<string, float>
             {
                 { "Atk", 3 },
                 { "Def", 0 },
@@ -44,7 +44,7 @@ public class ItemDatabase : MonoBehaviour
             }),
             
             new Item(1, "Shield", "Block attacks. Not good for much else.",
-            new Dictionary<string, int>
+            new Dictionary<string, float>
             {
                 { "Def", 2 },
                 { "Stam", 1 },
@@ -53,7 +53,7 @@ public class ItemDatabase : MonoBehaviour
             }),
             
             new Item(2, "Potion", "Low on health? This should help a smidge.",
-            new Dictionary<string, int>
+            new Dictionary<string, float>
             {
                 { "Healing", 5 },
                 { "Rare", 1 },
@@ -61,7 +61,7 @@ public class ItemDatabase : MonoBehaviour
             }),
 
             new Item(3, "Buckler", "Weaker shield.",
-            new Dictionary<string, int>
+            new Dictionary<string, float>
             {
                 { "Def", 1 },
                 { "Stam", 1 },

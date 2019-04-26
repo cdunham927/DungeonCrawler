@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 8766805316929287968}
   - component: {fileID: 1057142512748468707}
   - component: {fileID: 6946211511038483739}
-  - component: {fileID: 1912321045750484263}
+  - component: {fileID: 4718698816261638679}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -220,7 +220,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8766805316929287969}
   m_CullTransparentMesh: 0
---- !u!61 &1912321045750484263
+--- !u!61 &4718698816261638679
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
