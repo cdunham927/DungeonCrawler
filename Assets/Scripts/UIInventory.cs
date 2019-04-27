@@ -1,24 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIInventory : MonoBehaviour
 {
     public List<UIItem> UIItems = new List<UIItem>();
     public GameObject slotPrefab;
     public Transform slotPanel;
+    //PlayerController pcon;
 
     [Range(1, 16)]
     public int inventorySlots = 16;
 
     private void Awake()
     {
+        //pcon = FindObjectOfType<PlayerController>();
         for (int i = 0; i < inventorySlots; i++)
         {
             GameObject obj = Instantiate(slotPrefab);
-            obj.transform.parent = slotPanel;
+            obj.transform.SetParent(slotPanel);
             UIItems.Add(obj.GetComponentInChildren<UIItem>());
+            //if (i < 2)
+            //{
+                //obj.GetComponent<Image>().color = Color.blue;
+            //}
         }
+    }
+
+    public Item GetSlotA()
+    {
+        return UIItems[0].item;
+    }
+
+    public Item GetSlotB()
+    {
+        return UIItems[1].item;
     }
 
     public void UpdateSlot(int slot, Item item)

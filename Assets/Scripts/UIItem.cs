@@ -8,13 +8,15 @@ public class UIItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, 
 {
     public Item item;
     Image spriteImage;
+    GameObject inventoryCanvas;
     private UIItem selectedItem;
-    private Tooltip tooltip;
+    PlayerController pcon;
 
     private void Awake()
     {
+        pcon = FindObjectOfType<PlayerController>();
+        inventoryCanvas = GameObject.Find("InventoryCanvas");
         selectedItem = GameObject.Find("SelectedItem").GetComponent<UIItem>();
-        tooltip = GameObject.Find("Tooltip").GetComponent<Tooltip>();
         spriteImage = GetComponent<Image>();
         UpdateItem(null);
     }
@@ -40,19 +42,23 @@ public class UIItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, 
             if (selectedItem.item != null)
             {
                 Item clone = new Item(selectedItem.item);
+                selectedItem.transform.position = new Vector3(transform.position.x, transform.position.y, 5);
                 selectedItem.UpdateItem(this.item);
                 UpdateItem(clone);
+                pcon.GetCurrentItems();
             }
             else
             {
                 selectedItem.UpdateItem(this.item);
                 UpdateItem(null);
+                pcon.GetCurrentItems();
             }
         }
         else if (selectedItem.item != null)
         {
             UpdateItem(selectedItem.item);
             selectedItem.UpdateItem(null);
+            pcon.GetCurrentItems();
         }
         {
             
@@ -63,12 +69,17 @@ public class UIItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, 
     {
         if (this.item != null)
         {
-            tooltip.GenerateTooltip(this.item);
+
+            selectedItem.gameObject.transform.SetParent(null);
+            selectedItem.gameObject.transform.SetParent(inventoryCanvas.transform);
+            Tooltip.tool.gameObject.transform.SetParent(null);
+            Tooltip.tool.gameObject.transform.SetParent(inventoryCanvas.transform);
+            Tooltip.tool.GenerateTooltip(this.item);
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        tooltip.gameObject.SetActive(false);
+        Tooltip.tool.gameObject.SetActive(false);
     }
 }
