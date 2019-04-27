@@ -60,9 +60,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\audioForMixer.cs" />
+    <Compile Include="Assets\audiomix_individual.cs" />
     <Compile Include="Assets\Scripts\BattleController.cs" />
     <Compile Include="Assets\Scripts\BattleScript.cs" />
-    <Compile Include="Assets\Scripts\Billboard Scene Scripts\camera_mover.cs" />
+    <Compile Include="Assets\Scripts\Corey Warren\camera_mover.cs" />
+    <Compile Include="Assets\Scripts\Corey Warren\multi_track_mixer1.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\FollowMouse.cs" />
     <Compile Include="Assets\Scripts\GoblinController.cs" />
@@ -73,7 +76,10 @@
     <Compile Include="Assets\Scripts\Tooltip.cs" />
     <Compile Include="Assets\Scripts\UIInventory.cs" />
     <Compile Include="Assets\Scripts\UIItem.cs" />
+    <Compile Include="Assets\soloAudio.cs" />
+    <None Include="Assets\Resources\Shader\Default Shader.shader" />
     <None Include="Assets\Resources\Shader\Billboard Shader.shader" />
+    <None Include="Assets\Resources\Shader\BillBoard 2.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/corey/OneDrive/Documents/GitHub/DungeonCrawler/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
