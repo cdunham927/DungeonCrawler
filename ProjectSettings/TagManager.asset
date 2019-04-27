@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-<<<<<<< HEAD
-  - Audio Enemy
-=======
   - Ground
->>>>>>> 035c5db8a6e57770328628be7830d7fb13951ecb
+  - Audio Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,8 +15,8 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
-  - Ground
+  - 
+  - 
   - 
   - 
   - 
