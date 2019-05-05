@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour
     {
         hp -= dmg;
     }
+
     public void GameOver()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

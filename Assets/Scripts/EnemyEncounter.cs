@@ -28,15 +28,16 @@ public class EnemyEncounter : MonoBehaviour
     void Update()
     {
         encounterChance();
+
+        if (timeholder > 0 && pCont.walking) timeholder -= Time.deltaTime;
     }
 
     void encounterChance()
     {
-        while (pCont.walking && Time.time >= timeholder)
+        if (pCont.walking && timeholder <= 0)
         {
 
             enemyEncounterNumber = Random.Range(1, maxNumber + 1); //max number is exclusive so adding one makes the true max set to whatever maxNumber is
-            print("Number called");
             
             foreach (EnemyController enemy in enemies)
             {
@@ -71,7 +72,7 @@ public class EnemyEncounter : MonoBehaviour
                 }
             }
             enemyEncounterNumber = 10000;
-            timeholder = Time.time + timeBetweenRandomNumberCalls;
+            timeholder = timeBetweenRandomNumberCalls;
         }
     }
 }

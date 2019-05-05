@@ -25,15 +25,25 @@ public class BattleController : MonoBehaviour
 
     public void RemoveEnemy(EnemyController enem)
     {
-        Debug.Log("Dead", enem.gameObject);
         enemies.Remove(enem);
     }
 
     private void Update ()
     {   
-        if (battle == false && enemies.Count <= 0)
+        if (!battle && enemies.Count <= 0)
         {
-            Invoke("BattleOver", 0.1f);
+            BattleOver();
+        }
+
+        if (Application.isEditor && !battle && Input.GetKeyDown(KeyCode.K))
+        {
+            if (enemies.Count > 0)
+            {
+                foreach (EnemyController enem in enemies)
+                {
+                    enem.TakeDamage(9999);
+                }
+            }
         }
 
         if (player_turn == false)
@@ -43,6 +53,14 @@ public class BattleController : MonoBehaviour
                 enem.ChooseAttack();
             }
             player_turn = true;
+
+            //For invoking enemy turns
+            /*foreach (EnemyController enem in enemies)
+            {
+                enem.Invoke("ChooseAttack", 0.5f);
+                if (!enem.IsInvoking())
+                    player_turn = true;
+            }*/
         }
     }
 
