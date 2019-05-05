@@ -1,17 +1,32 @@
 ﻿Shader "Billboard Shader" {
+
+
    Properties {
       _MainTex ("Texture Image", 2D) = "white" {}
       _ScaleX ("Scale X", Float) = 1.0
       _ScaleY ("Scale Y", Float) = 1.0
+	   _MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
+     _CutTex ("Cutout (A)", 2D) = "white" {}
+	  _Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
+	  [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
    }
+
+
+
    
    SubShader {
-   Tags { "DisableBatching" = "True" }
+   Tags { "DisableBatching" = "True"
+   "Queue"="Transparent" 
+			"IgnoreProjector"="True" 
+			"RenderType"="Transparent" 
+			"PreviewType"="Plane"
+			"CanUseSpriteAtlas"="True"}
       Pass {   
          CGPROGRAM
  
          #pragma vertex vert  
          #pragma fragment frag
+		 #include "UnityCG.cginc"
 
          // User-specified uniforms            
          uniform sampler2D _MainTex;        
@@ -45,7 +60,10 @@
          {
             return tex2D(_MainTex, float2(input.tex.xy));   
          }
- 
+
+
+
+
          ENDCG
       }
    }

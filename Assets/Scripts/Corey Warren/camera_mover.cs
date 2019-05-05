@@ -79,7 +79,10 @@ public class camera_mover : MonoBehaviour
         }
 
 
-
+        if(!Input.anyKey)
+        {
+            rb1.velocity = new Vector3(0f, 0f, 0f);
+        }
 
     }
 }
