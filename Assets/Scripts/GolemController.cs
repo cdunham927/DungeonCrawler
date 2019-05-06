@@ -21,6 +21,8 @@ public class GolemController : EnemyController
     public override void SpecialAttack()
     {
         Debug.Log("Special Attack");
+        def += 3;
+        canSpecialAttack = false;
     }
 
     public override void TakeDamage(float dmg)

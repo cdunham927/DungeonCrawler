@@ -26,6 +26,7 @@ public class GoblinController : EnemyController
     public override void SpecialAttack()
     {
         Debug.Log("Special Attack");
+        controller.player.TakeDamage(atk * 2);
     }
 
     public override void TakeDamage(float dmg)

@@ -78,6 +78,26 @@ public class PlayerController : MonoBehaviour
     public float rotSpdX;
     public float rotSpdY;
 
+    public void LevelUp ()
+    {
+        int r = Random.Range(0, 3);
+
+        if (r == 0) 
+        {
+            maxHP += 10;
+        }
+        else if (r == 1) 
+        {
+            atk += 2;
+        }
+        else 
+        {
+            def += 1;
+        }
+        xp = 0;
+        hp = maxHP;
+    }
+
     private void Update()
     {
         if (uiStuff == null)
@@ -113,6 +133,12 @@ public class PlayerController : MonoBehaviour
                 hp = maxHP;
                 atk = 25;
             }
+        }
+
+        //Level up
+        if ( xp >= 35)
+        {
+            LevelUp();
         }
     }
 
