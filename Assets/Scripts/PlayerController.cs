@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (r == 1) 
         {
-            atk += 2;
+            atk += 1;
         }
         else 
         {

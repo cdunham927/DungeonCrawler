@@ -27,7 +27,7 @@ public class RatController : EnemyController
 
     public override void SpecialAttack()
     {
-        Debug.Log("Special Attack");
+        def += 1;
     }
 
     public override void TakeDamage(float dmg)

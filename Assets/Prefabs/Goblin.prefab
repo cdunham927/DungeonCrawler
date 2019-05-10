@@ -148,10 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   maxHP: 100
-  atk: 3
-  def: 3
-  evade: 3
-  xp: 5
+  atk: 2
+  def: 1
+  evade: 0
+  xp: 10
   spawnRate: 12
   buddySpawnRate: 1
   buddySpawnNumber: 2

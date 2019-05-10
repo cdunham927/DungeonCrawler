@@ -13,11 +13,6 @@ public class BattleController : MonoBehaviour
     public bool canAttack;
     public GameObject walls;
 
-    private void Awake()
-    {
-        battleCanvas = GameObject.Find("BattleCanvas");
-    }
-
     public void BattleOver()
     {
         battle = true;

@@ -59,6 +59,7 @@ public class EnemyEncounter : MonoBehaviour
                             //enem.transform.SetParent(null);
                         }
                         battleCanvas.SetActive(true);
+                        walls.SetActive(false);
                         break;
                     }
                     //Only one enemy spawns

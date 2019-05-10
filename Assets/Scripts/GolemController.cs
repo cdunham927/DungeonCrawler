@@ -6,10 +6,17 @@ using UnityEngine.UI;
 public class GolemController : EnemyController
 {
     BattleController controller;
-    
-    void Awake() 
+    PlayerController pCon;
+
+    void Awake()
     {
         controller = GameObject.Find("BattleController").GetComponent<BattleController>();
+        pCon = FindObjectOfType<PlayerController>();
+
+        GetComponent<SpriteRenderer>().flipX = (Random.value >= 0.5f) ? true : false;
+
+        health_bar = GetComponentInChildren<Image>();
+        health = health_bar.GetComponentInChildren<Text>();
     }
 
     public override void MainAttack()
@@ -20,7 +27,6 @@ public class GolemController : EnemyController
 
     public override void SpecialAttack()
     {
-        Debug.Log("Special Attack");
         def += 3;
         canSpecialAttack = false;
     }
@@ -32,11 +38,15 @@ public class GolemController : EnemyController
 
     public void DeadEnemy()
     {
-        Destroy (gameObject);
+        controller.RemoveEnemy(this);
+        gameObject.SetActive(false);
     }
 
     private void Update()
     {
+        //Health
+        health_bar.fillAmount = hp / maxHP;
+        health.text = "Golem HP: " + hp;
         if (hp <= 0)
         {
             DeadEnemy();
