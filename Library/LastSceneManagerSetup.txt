@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/ColeScene.unity
+=======
+- path: Assets/Scenes/MainMenu.unity
+>>>>>>> 841ab58346373a89c446b0afa9b3b972c32d437e
   isLoaded: 1
   isActive: 1
