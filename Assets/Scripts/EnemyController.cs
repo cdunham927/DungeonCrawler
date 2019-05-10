@@ -65,16 +65,4 @@ public abstract class EnemyController : MonoBehaviour
             MainAttack();
         }
     }
-
-    void OnMouseDown()
-    {
-        if (bCon == null) bCon = FindObjectOfType<BattleController>();
-        if (pCon == null) pCon = FindObjectOfType<PlayerController>();
-        if (bCon.canAttack)
-        {
-            TakeDamage(pCon.totalAttack);
-            bCon.canAttack = false;
-            bCon.player_turn = !bCon.player_turn;
-        }
-    }
 }

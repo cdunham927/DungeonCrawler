@@ -17,6 +17,7 @@ public class EnemyEncounter : MonoBehaviour
 
     //For ui
     public GameObject battleCanvas;
+    public GameObject walls;
 
     void Start()
     {
@@ -67,6 +68,7 @@ public class EnemyEncounter : MonoBehaviour
                         battle.enemies.Add(enem);
                         //enem.transform.SetParent(null);
                         battleCanvas.SetActive(true);
+                        walls.SetActive(false);
                         break;
                     }
                 }

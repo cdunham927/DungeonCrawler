@@ -12,6 +12,8 @@ public class RatController : EnemyController
     {
         controller = GameObject.Find("BattleController").GetComponent<BattleController>();
         pCon = FindObjectOfType<PlayerController>();
+        
+        GetComponent<SpriteRenderer>().flipX = (Random.value >= 0.5f) ? true : false;
 
         health_bar = GetComponentInChildren<Image>();
         health = health_bar.GetComponentInChildren<Text>();

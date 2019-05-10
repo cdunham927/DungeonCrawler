@@ -11,6 +11,7 @@ public class BattleController : MonoBehaviour
     public GameObject battleCanvas;
     public List<EnemyController> enemies = new List<EnemyController>();
     public bool canAttack;
+    public GameObject walls;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class BattleController : MonoBehaviour
     {
         battle = true;
         battleCanvas.gameObject.SetActive(false);
+        walls.SetActive(true);
     }
 
     public void RemoveEnemy(EnemyController enem)

@@ -10,10 +10,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxHP;
     [SerializeField] float atk;
     [SerializeField] float def;
-    [SerializeField] float speed; //Player Speed Stat
+    public int level = 1;
     public float xp;
     public Image health_bar;
     public Text health;
+    public Image xpBar;
+    public Text expText;
+    public Text statText;
+    public Text levelText;
 
     //Player total attack
     public float totalAttack;
@@ -68,7 +72,7 @@ public class PlayerController : MonoBehaviour
     float GetItemStats()
     {
         float mod = 0;
-        slot1Item.stats.TryGetValue("Atk", out mod);
+        if (slot1Item != null) slot1Item.stats.TryGetValue("Atk", out mod);
         return mod;
     }
 
@@ -94,6 +98,7 @@ public class PlayerController : MonoBehaviour
         {
             def += 1;
         }
+        level++;
         xp = 0;
         hp = maxHP;
     }
@@ -119,9 +124,13 @@ public class PlayerController : MonoBehaviour
 
         if (Cursor.lockState == CursorLockMode.None) Cursor.lockState = CursorLockMode.Confined;
         
-        //Health
+        //Health and other UI stuff
         health_bar.fillAmount = hp / maxHP;
-        health.text = "Player HP: " + hp;
+        xpBar.fillAmount = xp / 35f;
+        health.text = "HP: " + hp + "/" + maxHP;
+        expText.text = "Exp: " + xp + "/" + 35;
+        statText.text = "Atk: " + atk + "\t\tDef: " + def;
+        levelText.text = "Level " + level + " Knight";
 
         if (hp <= 0) GameOver();
 
@@ -133,12 +142,36 @@ public class PlayerController : MonoBehaviour
                 hp = maxHP;
                 atk = 25;
             }
+
+            if (Input.GetKey(KeyCode.L))
+            {
+                xp += 1;
+            }
         }
 
         //Level up
-        if ( xp >= 35)
+        if (xp >= 35)
         {
             LevelUp();
+        }
+
+
+        if (Input.GetMouseButtonDown(0) && controller.canAttack)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    Debug.Log(hit.collider.gameObject.name);
+
+                    hit.collider.gameObject.GetComponent<EnemyController>().TakeDamage(totalAttack);
+                    controller.canAttack = false;
+                    controller.player_turn = !controller.player_turn;
+                }
+            }
         }
     }
 
@@ -168,7 +201,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                bod.AddForce(transform.up * jumpSpd);
+                //bod.AddForce(transform.up * jumpSpd);
             }
         }
         
