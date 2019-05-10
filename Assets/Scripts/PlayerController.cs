@@ -183,6 +183,15 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void Play ()
+    {
+        SceneManager.LoadScene("ColeScene");
+    }
+
+    public void QuitGame ()
+    {
+        Application.Quit();
+    }
 
     public void axe_hit(float multi)
     {
