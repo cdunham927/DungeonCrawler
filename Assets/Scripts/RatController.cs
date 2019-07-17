@@ -21,22 +21,26 @@ public class RatController : EnemyController
 
     public override void MainAttack()
     {
+        controller.UpdateLog("The Rat attacks! You take " + (atk).ToString() + "damage.\n");
         controller.player.TakeDamage(atk);
     }
 
 
     public override void SpecialAttack()
     {
+        controller.UpdateLog("The Rat musters a weak defense!\n");
         def += 1;
     }
 
     public override void TakeDamage(float dmg)
     {
+        controller.UpdateLog("Rat took " + dmg + " damage.\n");
         hp -= dmg;
     }
 
     public void DeadEnemy()
     {
+        controller.UpdateLog("You got " + xp + " from the Rat.\n");
         controller.RemoveEnemy(this);
         gameObject.SetActive(false);
     }

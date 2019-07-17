@@ -377,8 +377,8 @@ MonoBehaviour:
   def: 5
   evade: 0
   xp: 35
-  spawnRate: 100
-  buddySpawnRate: 0.25
+  spawnRate: 8
+  buddySpawnRate: 0.1
   buddySpawnNumber: 2
   specialAttackChance: 0.5
   canSpecialAttack: 1

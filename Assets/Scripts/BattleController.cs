@@ -13,6 +13,13 @@ public class BattleController : MonoBehaviour
     public bool canAttack;
     public GameObject walls;
 
+    public GameObject pauseUI;
+    public bool paused = false;
+
+    public Text battleLog;
+    float timeToDeleteText;
+    public float lerpSpd;
+
     public void BattleOver()
     {
         battle = true;
@@ -25,8 +32,34 @@ public class BattleController : MonoBehaviour
         enemies.Remove(enem);
     }
 
+    public void UpdateLog(string text)
+    {
+        battleLog.text += text + "\n";
+        battleLog.color = Color.white;
+        timeToDeleteText = 5f;
+    }
+
     private void Update ()
-    {   
+    {
+        battleLog.color = Color.Lerp(battleLog.color, new Color(1, 1, 1, 0), Time.deltaTime * lerpSpd);
+
+        if (timeToDeleteText > 0) timeToDeleteText -= Time.deltaTime;
+        else
+        {
+            battleLog.text = "";
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            UpdateLog("This is a line of text");
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            paused = !paused;
+            pauseUI.SetActive(!pauseUI.activeInHierarchy);
+        }
+
         if (!battle && enemies.Count <= 0)
         {
             BattleOver();

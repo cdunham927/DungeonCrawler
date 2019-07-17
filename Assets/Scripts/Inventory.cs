@@ -10,10 +10,12 @@ public class Inventory : MonoBehaviour
     public UIInventory inventoryUI;
     [SerializeField] Transform spawnPos;
     PlayerController pcon;
+    SpecialAttack special;
 
     private void Awake()
     {
         pcon = FindObjectOfType<PlayerController>();
+        special = FindObjectOfType<SpecialAttack>();
 
         inventoryCanvas = GameObject.Find("InventoryCanvas");
         GameObject obj = Instantiate(uiInventoryPrefab, spawnPos);
@@ -22,7 +24,6 @@ public class Inventory : MonoBehaviour
         inventoryUI.transform.SetParent(inventoryCanvas.transform);
 
         GiveItem(0);
-        GiveItem("Shield");
 
         //RemoveItem(1);
 
@@ -42,7 +43,29 @@ public class Inventory : MonoBehaviour
         Item itemToAdd = ItemDatabase.database.GetItem(id);
         playerItems.Add(itemToAdd);
         inventoryUI.AddNewItem(itemToAdd);
-        Debug.Log("Added: " + itemToAdd.name);
+
+        //If the item is in the first two slots of the inventory
+        if (playerItems.Count < 3)
+        {
+            if (special.curWeapon == SpecialAttack.Weapons.none)
+            {
+                //Equip sword
+                if (itemToAdd.weaponType == Item.Weapons.sword)
+                {
+                    special.curWeapon = SpecialAttack.Weapons.sword;
+                }
+                //Equip axe
+                if (itemToAdd.weaponType == Item.Weapons.axe)
+                {
+                    special.curWeapon = SpecialAttack.Weapons.axe;
+                }
+                //Equip spear
+                if (itemToAdd.weaponType == Item.Weapons.spear)
+                {
+                    special.curWeapon = SpecialAttack.Weapons.spear;
+                }
+            }
+        }
     }
 
     public void GiveItem(string name)

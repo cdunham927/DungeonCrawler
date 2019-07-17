@@ -33,7 +33,7 @@ public class ItemDatabase : MonoBehaviour
     {
         items = new List<Item>()
         {
-            new Item(0, "Sword", "Stab things. Handle with care.",
+            new Item(0, "Sword", "Stab things. Handle with care.", Item.Weapons.sword,
             new Dictionary<string, float>
             {
                 { "Atk", 3 },
@@ -43,7 +43,7 @@ public class ItemDatabase : MonoBehaviour
                 { "Cost", 10 }
             }),
             
-            new Item(1, "Shield", "Block attacks. Not good for much else.",
+            new Item(1, "Shield", "Block attacks. Not good for much else.", Item.Weapons.none,
             new Dictionary<string, float>
             {
                 { "Def", 2 },
@@ -52,7 +52,7 @@ public class ItemDatabase : MonoBehaviour
                 { "Cost", 8 }
             }),
             
-            new Item(2, "Potion", "Low on health? This should help a smidge.",
+            new Item(2, "Potion", "Low on health? This should help a smidge.", Item.Weapons.none,
             new Dictionary<string, float>
             {
                 { "Healing", 5 },
@@ -60,7 +60,25 @@ public class ItemDatabase : MonoBehaviour
                 { "Cost", 5 }
             }),
 
-            new Item(3, "Buckler", "Weaker shield.",
+            new Item(3, "Buckler", "Weaker shield.", Item.Weapons.none,
+            new Dictionary<string, float>
+            {
+                { "Def", 1 },
+                { "Stam", 1 },
+                { "Rare", 1 },
+                { "Cost", 5 }
+            }),
+
+            new Item(4, "Axe", "Very sharp. Dangerous in the right hands.", Item.Weapons.axe,
+            new Dictionary<string, float>
+            {
+                { "Def", 1 },
+                { "Stam", 1 },
+                { "Rare", 1 },
+                { "Cost", 5 }
+            }),
+
+            new Item(5, "Spear", "Long, easy to thrust. Stick with the pointy end.", Item.Weapons.spear,
             new Dictionary<string, float>
             {
                 { "Def", 1 },

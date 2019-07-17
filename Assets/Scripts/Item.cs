@@ -10,14 +10,15 @@ public class Item
     public Sprite icon;
     public Dictionary<string, float> stats = new Dictionary<string, float>();
 
-    public enum Actions { attack, heal };
-    public Actions itemAction = Actions.attack;
+    public enum Weapons { none, sword, axe, spear };
+    public Weapons weaponType = Weapons.none;
 
-    public Item(int id, string name, string description, Dictionary<string, float> stats)
+    public Item(int id, string name, string description, Weapons type, Dictionary<string, float> stats)
     {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.weaponType = type;
         this.icon = Resources.Load<Sprite>("ItemSprites/" + name);
         this.stats = stats;
     }
@@ -27,30 +28,8 @@ public class Item
         this.id = item.id;
         this.name = item.name;
         this.description = item.description;
+        this.weaponType = item.weaponType;
         this.icon = Resources.Load<Sprite>("ItemSprites/" + item.name);
         this.stats = item.stats;
-    }
-
-    public void Use()
-    {
-        switch(itemAction)
-        {
-            case Actions.attack:
-                AttackItem();
-                break;
-            case Actions.heal:
-                HealItem();
-                break;
-        }
-    }
-
-    void AttackItem()
-    {
-
-    }
-
-    void HealItem()
-    {
-
     }
 }

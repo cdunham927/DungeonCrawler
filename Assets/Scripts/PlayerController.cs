@@ -19,8 +19,9 @@ public class PlayerController : MonoBehaviour
     public Text statText;
     public Text levelText;
 
-    //Player total attack
+    //Player total attack and defense
     public float totalAttack;
+    public float totalDef;
 
     BattleController controller;
     public UIInventory uiStuff;
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
     //Spots to spawn the enemy(in front of the player)
     public GameObject[] enemySpawnPoints;
 
+    SpecialAttack special;
+
     //Keep track of the player moving
     public bool walking = false;
 
@@ -37,11 +40,15 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        special = GetComponent<SpecialAttack>();
         bod = GetComponent<Rigidbody>();
         controller = GameObject.Find("BattleController").GetComponent<BattleController>();
 
         GetCurrentItems();
         totalAttack = atk;
+
+        GetItemAttack();
+        GetItemDefense();
     }
 
     public void GetCurrentItems()
@@ -64,16 +71,29 @@ public class PlayerController : MonoBehaviour
         {
             GetCurrentItems();
         }
-        float mod = GetItemStats();
+        float defe = GetItemDefense();
+        float mod = GetItemAttack();
 
+        totalDef = defe + def;
         totalAttack = atk + mod;
-    }  
+    }
 
-    float GetItemStats()
+    float GetItemAttack()
     {
         float mod = 0;
+        float mod2 = 0;
         if (slot1Item != null) slot1Item.stats.TryGetValue("Atk", out mod);
-        return mod;
+        if (slot2Item != null) slot2Item.stats.TryGetValue("Atk", out mod2);
+        return mod + mod2;
+    }
+
+    float GetItemDefense()
+    {
+        float mod = 0;
+        float mod2 = 0;
+        if (slot1Item != null) slot1Item.stats.TryGetValue("Def", out mod);
+        if (slot2Item != null) slot2Item.stats.TryGetValue("Def", out mod2);
+        return mod + mod2;
     }
 
     public float spd;
@@ -108,7 +128,7 @@ public class PlayerController : MonoBehaviour
         if (uiStuff == null)
             uiStuff = FindObjectOfType<UIInventory>();
 
-        if (controller.battle)
+        if (controller.battle && !controller.paused)
         {
             float check = Input.GetAxis("Mouse X");
             //Debug.Log("Our x is " + check);
@@ -129,7 +149,7 @@ public class PlayerController : MonoBehaviour
         xpBar.fillAmount = xp / 35f;
         health.text = "HP: " + hp + "/" + maxHP;
         expText.text = "Exp: " + xp + "/" + 35;
-        statText.text = "Atk: " + atk + "\t\tDef: " + def;
+        statText.text = "Atk: " + totalAttack + "\t\tDef: " + totalDef;
         levelText.text = "Level " + level + " Knight";
 
         if (hp <= 0) GameOver();
@@ -177,7 +197,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (controller.battle)
+        if (controller.battle && !controller.paused)
         {
             Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
@@ -216,7 +236,7 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Play ()
+    public void Play()
     {
         SceneManager.LoadScene("ColeScene");
     }
@@ -226,27 +246,45 @@ public class PlayerController : MonoBehaviour
         Application.Quit();
     }
 
+    public void sword_attack()
+    {
+        if (controller.player_turn)
+        {
+            controller.UpdateLog("You let loose on all nearby enemies!");
+            foreach (EnemyController enem in controller.enemies)
+            {
+                totalAttack = (atk + GetItemAttack());
+                enem.TakeDamage(totalAttack);
+            }
+
+            controller.player_turn = false;
+        }
+    }
+
     public void axe_hit(float multi)
     {
         if (controller.player_turn == true)
         {
             controller.canAttack = true;
         }
-        totalAttack = atk * multi;
+        controller.UpdateLog("You wind up a powerful swing!\n");
+        totalAttack = Mathf.Round((atk + GetItemAttack()) * multi);
     }
 
     public void spear_attack()
     {
-
         int counter = 0;
 
+        controller.UpdateLog("You unleash a flurry of attacks!\n");
 
-        int attack_amount = Random.Range(1, 10);
+        int attack_amount = Random.Range(2, 4);
         while (attack_amount >= counter)
         {
-            Attack();
+            totalAttack = (atk + GetItemAttack());
+            EnemyController enemToAtk = controller.enemies[Random.Range(0, controller.enemies.Count)];
+            enemToAtk.TakeDamage(totalAttack);
             counter++;
         }
-        counter = 0;
+        //counter = 0;
     }
 }

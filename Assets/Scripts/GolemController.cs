@@ -21,23 +21,27 @@ public class GolemController : EnemyController
 
     public override void MainAttack()
     {
+        controller.UpdateLog("The Golem attacks! You take " + (atk).ToString() + "damage.\n");
         controller.player.TakeDamage(atk);
     }
     
 
     public override void SpecialAttack()
     {
+        controller.UpdateLog("The Golem defends itself! Gets increased defense.\n");
         def += 3;
         canSpecialAttack = false;
     }
 
     public override void TakeDamage(float dmg)
     {
+        controller.UpdateLog("Golem took " + dmg + " damage.\n");
         hp -= dmg;
     }
 
     public void DeadEnemy()
     {
+        controller.UpdateLog("You got " + xp + " from the Golem.\n");
         controller.RemoveEnemy(this);
         gameObject.SetActive(false);
     }

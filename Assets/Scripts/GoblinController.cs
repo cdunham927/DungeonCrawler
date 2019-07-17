@@ -19,23 +19,26 @@ public class GoblinController : EnemyController
 
     public override void MainAttack()
     {
+        controller.UpdateLog("The Goblin attacks! You take " + (atk).ToString() + "damage.\n");
         controller.player.TakeDamage(atk);
     }
     
 
     public override void SpecialAttack()
     {
-        Debug.Log("Special Attack");
+        controller.UpdateLog("The Goblin used its special attack! You take " + (atk * 2).ToString() + "damage.\n");
         controller.player.TakeDamage(atk * 2);
     }
 
     public override void TakeDamage(float dmg)
     {
+        controller.UpdateLog("Goblin took " + dmg + " damage.\n");
         hp -= dmg;
     }
 
     public void DeadEnemy()
     {
+        controller.UpdateLog("You got " + xp + " from the Goblin.\n");
         controller.RemoveEnemy(this);
         gameObject.SetActive(false);
     }

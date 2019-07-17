@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class BattleScript : PlayerController
+public class BattleScript : MonoBehaviour
 {
-    public Button attackButton;
+    public void Play()
+    {
+        SceneManager.LoadScene("ColeScene");
+    }
 
-    void Start()
+    public void QuitGame()
     {
-        Button btn = attackButton.GetComponent<Button>();
-        btn.onClick.AddListener(AttackOnClick);
+        Application.Quit();
     }
-    void AttackOnClick()
-    {
-        //Output this to console when Button is clicked
-        Debug.Log("You have dealt damage!");
-    }
+
 }

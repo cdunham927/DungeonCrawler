@@ -44,8 +44,6 @@ public abstract class EnemyController : MonoBehaviour
         enemyCanvas = GameObject.Find("EnemyCanvas");
         enemyInventory = GetComponent<EnemyInventory>();
 
-        enemyInventory.GiveItem(0);
-
         health_bar = GetComponentInChildren<Image>();
         health = health_bar.GetComponentInChildren<Text>();
     }

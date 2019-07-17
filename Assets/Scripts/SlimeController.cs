@@ -19,6 +19,7 @@ public class SlimeController : EnemyController
 
     public override void MainAttack()
     {
+        controller.UpdateLog("The Slime attacks! You take " + (atk).ToString() + "damage.\n");
         controller.player.TakeDamage(atk);
     }
 
@@ -28,6 +29,7 @@ public class SlimeController : EnemyController
         //dividing its health among them
         if (hp >= 3 && controller.enemies.Count < 3)
         {
+            controller.UpdateLog("The Slime splits itself! Now there are 3 weaker slimes.\n");
             float splitHp = Mathf.RoundToInt(hp / 3);
             hp = splitHp;
             EnemyController oSlime = Instantiate(gameObject, pCon.enemySpawnPoints[1].transform).GetComponent<EnemyController>();
@@ -41,13 +43,16 @@ public class SlimeController : EnemyController
         }
         else if (hp >= 2 && controller.enemies.Count < 2)
         {
+            controller.UpdateLog("The Slime splits itself! Now there are 2 weaker slimes.\n");
             float splitHp = Mathf.RoundToInt(hp / 2);
             EnemyController oSlime = Instantiate(gameObject, pCon.enemySpawnPoints[1].transform).GetComponent<EnemyController>();
             oSlime.hp = splitHp;
             oSlime.canSpecialAttack = false;
             controller.enemies.Add(oSlime);
         }
-        else {
+        else
+        {
+            controller.UpdateLog("The Slime tries to split itself... but fails.\n");
             //Slime doesn't have enough health to split
         }
         canSpecialAttack = false;
@@ -55,11 +60,13 @@ public class SlimeController : EnemyController
 
     public override void TakeDamage(float dmg)
     {
+        controller.UpdateLog("Slime took " + dmg + " damage");
         hp -= dmg;
     }
 
     public void DeadEnemy()
     {
+        controller.UpdateLog("You got " + xp + " from the Slime");
         controller.RemoveEnemy(this);
         gameObject.SetActive(false);
     }
